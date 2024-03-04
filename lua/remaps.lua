@@ -22,13 +22,16 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {desc = '[F]ormat current buffer'})
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux new' ~/.local/bin/tmux-sessionizer<CR>")
+vim.keymap.set("n", "<leader>f", function()
+    require('conform').format({ lsp_fallback = true, })
+  end,
+  { desc = '[F]ormat current buffer' })
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-'>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
