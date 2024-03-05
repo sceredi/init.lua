@@ -51,7 +51,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -623,7 +623,7 @@ require('lazy').setup {
           end, { 'i', 's' }),
         },
         sources = {
-          { name = 'copilot', group_index = 2 },
+          { name = 'copilot', priority = 1000 },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
@@ -692,6 +692,10 @@ require('lazy').setup {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-context',
+      opts = {},
+    },
     config = function()
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
