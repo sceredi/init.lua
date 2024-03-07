@@ -27,10 +27,6 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.colorcolumn = "80"
 
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
-
 
 -- Make line numbers default
 vim.wo.number = true
