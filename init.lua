@@ -415,8 +415,14 @@ require('lazy').setup {
         clangd = {},
         gopls = {},
         pyright = {},
+        ocamllsp = {
+          cmd = { 'ocamllsp' },
+          on_attach = function(_, bufnr)
+            vim.lsp.inlay_hint.enable(bufnr, true)
+          end,
+        },
         rust_analyzer = {
-          on_attach = function(client, bufnr)
+          on_attach = function(_, bufnr)
             vim.lsp.inlay_hint.enable(bufnr, true)
           end,
         },
