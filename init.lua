@@ -415,8 +415,20 @@ require('lazy').setup {
         clangd = {},
         gopls = {},
         pyright = {},
+        cucumber_language_server = {
+          settings = {
+            cucumber = {
+              features = { '**/*.feature' },
+              glue = { '**/*Steps.*', '**/*Step.*' },
+            },
+          },
+        },
         ocamllsp = {
           cmd = { 'ocamllsp' },
+          settings = {
+            codelens = { enable = true },
+            inlayhints = { enable = true },
+          },
           on_attach = function(_, bufnr)
             vim.lsp.inlay_hint.enable(bufnr, true)
           end,
@@ -459,6 +471,15 @@ require('lazy').setup {
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
+          },
+        },
+      }
+      require('lspconfig').marksman.setup {
+        cmd = { 'marksman' },
+        filetypes = { 'markdown' },
+        settings = {
+          marksman = {
+            enable = true,
           },
         },
       }
