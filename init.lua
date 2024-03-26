@@ -423,16 +423,6 @@ require('lazy').setup {
             },
           },
         },
-        ocamllsp = {
-          cmd = { 'ocamllsp' },
-          settings = {
-            codelens = { enable = true },
-            inlayhints = { enable = true },
-          },
-          on_attach = function(_, bufnr)
-            vim.lsp.inlay_hint.enable(bufnr, true)
-          end,
-        },
         rust_analyzer = {
           on_attach = function(_, bufnr)
             vim.lsp.inlay_hint.enable(bufnr, true)
@@ -473,6 +463,17 @@ require('lazy').setup {
             },
           },
         },
+      }
+      require('lspconfig').ocamllsp.setup {
+        -- cmd = { 'ocamllsp' },
+        -- filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },
+        settings = {
+          codelens = { enable = true },
+          inlayhints = { enable = true },
+        },
+        on_attach = function(_, bufnr)
+          vim.lsp.inlay_hint.enable(bufnr, true)
+        end,
       }
       require('lspconfig').marksman.setup {
         cmd = { 'marksman' },
