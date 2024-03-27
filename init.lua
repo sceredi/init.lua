@@ -464,7 +464,8 @@ require('lazy').setup {
           },
         },
       }
-      require('lspconfig').ocamllsp.setup {
+      local lspconfig = require 'lspconfig'
+      lspconfig.ocamllsp.setup {
         -- cmd = { 'ocamllsp' },
         -- filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },
         settings = {
@@ -475,7 +476,7 @@ require('lazy').setup {
           vim.lsp.inlay_hint.enable(bufnr, true)
         end,
       }
-      require('lspconfig').marksman.setup {
+      lspconfig.marksman.setup {
         cmd = { 'marksman' },
         filetypes = { 'markdown' },
         settings = {
