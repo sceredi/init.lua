@@ -476,6 +476,7 @@ require('lazy').setup {
           vim.lsp.inlay_hint.enable(bufnr, true)
         end,
       }
+      lspconfig.gleam.setup {}
       lspconfig.marksman.setup {
         cmd = { 'marksman' },
         filetypes = { 'markdown' },
