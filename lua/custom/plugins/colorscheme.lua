@@ -14,6 +14,7 @@ return {
     'tjdevries/colorbuddy.nvim',
     config = function()
       vim.cmd.colorscheme 'gruvbuddy'
+      vim.cmd "hi colorcolumn guibg='#282a2e'"
     end,
   },
 }
