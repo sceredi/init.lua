@@ -23,6 +23,8 @@ local sn = ls.snippet_node
 local default_values = {
   int = '0',
   bool = 'false',
+  float64 = '0.0',
+  float32 = '0.0',
   string = '""',
 
   error = function(_, info)

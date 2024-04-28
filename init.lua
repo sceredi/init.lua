@@ -602,6 +602,16 @@ require('lazy').setup {
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
+          ['<C-j>'] = cmp.mapping(function()
+            if luasnip.choice_active() then
+              luasnip.change_choice(1)
+            end
+          end),
+          ['<C-k>'] = cmp.mapping(function()
+            if luasnip.choice_active() then
+              luasnip.change_choice(-1)
+            end
+          end),
         },
         sources = {
           { name = 'copilot', priority = 1000 },
