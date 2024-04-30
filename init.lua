@@ -433,11 +433,7 @@ require('lazy').setup {
             },
           },
         },
-        rust_analyzer = {
-          on_attach = function(_, _)
-            vim.lsp.inlay_hint.enable(true)
-          end,
-        },
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -465,9 +461,6 @@ require('lazy').setup {
                 -- If lua_ls is really slow on your computer, you can try this instead:
                 -- library = { vim.env.VIMRUNTIME },
               },
-              completion = {
-                callSnippet = 'Replace',
-              },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
@@ -480,11 +473,7 @@ require('lazy').setup {
         -- filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },
         settings = {
           codelens = { enable = true },
-          inlayhints = { enable = true },
         },
-        on_attach = function(_, bufnr)
-          vim.lsp.inlay_hint.enable(bufnr, true)
-        end,
       }
       lspconfig.gleam.setup {}
       lspconfig.marksman.setup {
