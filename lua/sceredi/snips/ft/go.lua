@@ -182,4 +182,25 @@ if <err_same> != nil {
     )
   ),
   s('ie', fmta('if err != nil {\n\treturn <err>\n}', { err = i(1, 'err') })),
+  s(
+    'egi',
+    fmta(
+      [[
+<val>, <err> := <f>(<args>)
+if <err_same> != nil {
+	<manage_err>
+}
+<finish>
+]],
+      {
+        val = i(1),
+        err = i(2, 'err'),
+        f = i(3),
+        args = i(4),
+        err_same = rep(2),
+        manage_err = i(5),
+        finish = i(0),
+      }
+    )
+  ),
 })
