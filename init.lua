@@ -89,6 +89,11 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 --
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -422,8 +427,6 @@ require('lazy').setup {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
-        gopls = {},
         pyright = {},
         cucumber_language_server = {
           settings = {
@@ -469,8 +472,6 @@ require('lazy').setup {
       }
       local lspconfig = require 'lspconfig'
       lspconfig.ocamllsp.setup {
-        -- cmd = { 'ocamllsp' },
-        -- filetypes = { 'ocaml', 'menhir', 'ocamlinterface', 'ocamllex', 'reason', 'dune' },
         settings = {
           codelens = { enable = true },
         },
@@ -486,6 +487,7 @@ require('lazy').setup {
         },
       }
       lspconfig.gopls.setup {}
+      lspconfig.clangd.setup {}
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install

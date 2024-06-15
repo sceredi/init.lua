@@ -1,7 +1,7 @@
 return {
   -- Autoformat
   'stevearc/conform.nvim',
-  lazy=false,
+  lazy = false,
   keys = {
     {
       '<leader>f',
@@ -36,6 +36,7 @@ return {
       -- javascript = { { "prettierd", "prettier" } },
 
       nix = { 'nixfmt' },
+      cpp = { 'clang-format' },
     },
     formatters = {
       nixfmt = {
