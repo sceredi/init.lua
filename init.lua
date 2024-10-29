@@ -440,7 +440,6 @@ require('lazy').setup {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
         --
 
         lua_ls = {
@@ -485,6 +484,8 @@ require('lazy').setup {
       }
       lspconfig.gopls.setup {}
       lspconfig.clangd.setup {}
+      lspconfig.tsserver.setup {}
+      lspconfig.volar.setup {}
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
