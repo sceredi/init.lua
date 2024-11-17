@@ -484,7 +484,7 @@ require('lazy').setup {
       }
       lspconfig.gopls.setup {}
       lspconfig.clangd.setup {}
-      lspconfig.tsserver.setup {}
+      lspconfig.ts_ls.setup {}
       lspconfig.volar.setup {}
 
       -- Ensure the servers and tools above are installed
