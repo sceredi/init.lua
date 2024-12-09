@@ -433,7 +433,6 @@ require('lazy').setup {
             },
           },
         },
-        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -483,6 +482,7 @@ require('lazy').setup {
         },
       }
       lspconfig.gopls.setup {}
+      lspconfig.rust_analyzer.setup {}
       lspconfig.clangd.setup {}
       lspconfig.ts_ls.setup {}
       lspconfig.volar.setup {}
