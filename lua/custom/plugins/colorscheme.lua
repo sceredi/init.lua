@@ -1,10 +1,8 @@
 return {
   {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    variant = 'moon',
+    'tjdevries/colorbuddy.nvim',
     config = function()
-      vim.cmd.colorscheme 'rose-pine-moon'
+      vim.cmd.colorscheme 'gruvbuddy'
     end,
   },
 }

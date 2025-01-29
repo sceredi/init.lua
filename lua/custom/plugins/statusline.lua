@@ -1,8 +1,8 @@
 return {
-  'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  options = { theme = 'zenbones' },
-  config = function()
-    require('lualine').setup {}
-  end,
+  {
+    'tjdevries/express_line.nvim',
+    config = function()
+      require('custom.statusline').setup()
+    end,
+  },
 }
