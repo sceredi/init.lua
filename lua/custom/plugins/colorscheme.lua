@@ -5,4 +5,8 @@ return {
       vim.cmd.colorscheme 'gruvbuddy'
     end,
   },
+  {
+    'sainnhe/gruvbox-material',
+    name = 'gruvbox-material',
+  },
 }
