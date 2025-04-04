@@ -1,12 +1,7 @@
 return {
-  {
-    'tjdevries/colorbuddy.nvim',
-    config = function()
-      vim.cmd.colorscheme 'gruvbuddy'
-    end,
-  },
-  {
-    'sainnhe/gruvbox-material',
-    name = 'gruvbox-material',
-  },
+  'rose-pine/neovim',
+  name = 'rose-pine',
+  config = function()
+    vim.cmd 'colorscheme rose-pine'
+  end,
 }
