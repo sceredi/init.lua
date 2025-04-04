@@ -177,7 +177,7 @@
           # vim.g.python3_host_prog
           # or run from nvim terminal via :!<packagename>-python3
           python3.libraries = {
-            test = (_: [ ]);
+            test = _: [ ];
           };
           # populates $LUA_PATH and $LUA_CPATH
           extraLuaPackages = {
