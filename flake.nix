@@ -70,6 +70,7 @@
               vtsls
               zls
               gleam
+              metals
 
               # dap
               delve
