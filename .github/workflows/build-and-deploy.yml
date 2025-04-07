@@ -42,7 +42,7 @@ jobs:
         run: statix fix
 
       - name: Run Nix Format
-        run: nix fmt
+        run: alejandra .
 
       - name: Update Nix Flake
         run: nix flake update
