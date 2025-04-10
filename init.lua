@@ -336,13 +336,16 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
       -- NOTE: nixCats: there is help in nixCats for lsps at `:h nixCats.LSPs` and also `:h nixCats.luaUtils`
       -- TODO: I have other lsps to configure, but have to be added to the flake
       local servers = {}
-      servers.clangd = {}
+      servers.ccls = {}
       servers.gopls = {}
       servers.pyright = {}
       servers.rust_analyzer = {}
       servers.vtsls = {}
       servers.zls = {}
       servers.gleam = {}
+      servers.yamlls = {}
+      servers.dockerls = {}
+      servers.jsonls = {}
 
       -- NOTE: nixCats: nixd is not available on mason.
       -- Feel free to check the nixd docs for more configuration options:
