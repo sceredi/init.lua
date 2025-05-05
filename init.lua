@@ -346,6 +346,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
       servers.yamlls = {}
       servers.dockerls = {}
       servers.jsonls = {}
+      servers.tinymist = {}
 
       -- NOTE: nixCats: nixd is not available on mason.
       -- Feel free to check the nixd docs for more configuration options:

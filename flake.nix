@@ -72,6 +72,7 @@
           yaml-language-server
           dockerfile-language-server-nodejs
           vscode-langservers-extracted
+          tinymist
 
           # dap
           delve
@@ -86,7 +87,7 @@
           google-java-format
           ocamlformat
           nodePackages.prettier
-          nixfmt-rfc-style
+          alejandra
         ];
       };
 
@@ -133,6 +134,7 @@
           oil-nvim
           render-markdown-nvim
           trouble-nvim
+          typst-preview-nvim
           undotree
         ];
       };
