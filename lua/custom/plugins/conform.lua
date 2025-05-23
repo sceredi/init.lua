@@ -34,6 +34,8 @@ return { -- Autoformat
 
       nix = { 'alejandra' },
       cpp = { 'clang-format' },
+
+      elixir = { 'mix format' },
     },
     formatters = {
       nixfmt = {

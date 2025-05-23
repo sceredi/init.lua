@@ -339,6 +339,9 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
       servers.ccls = {}
       servers.gopls = {}
       servers.pyright = {}
+      servers.elixirls = {
+        cmd = { 'elixir-ls' },
+      }
       servers.rust_analyzer = {}
       servers.vtsls = {}
       servers.zls = {}
