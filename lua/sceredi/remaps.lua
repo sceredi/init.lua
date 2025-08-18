@@ -33,3 +33,6 @@ vim.keymap.set('n', '<leader>rw', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set('n', '<left>', '<cmd>tabprev<CR>', { desc = 'Go to previous tab' })
 vim.keymap.set('n', '<right>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
 vim.keymap.set('n', '<leader>tt', '<cmd>tabnew | term<CR>', { desc = 'Open new tab' })
+
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
