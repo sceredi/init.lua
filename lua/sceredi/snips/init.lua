@@ -1,1 +1,1 @@
--- require 'sceredi.snips.ft.go'
+require 'sceredi.snips.ft.go'
