@@ -74,6 +74,7 @@
           vscode-langservers-extracted
           tinymist
           elixir-ls
+          rust-analyzer
 
           # dap
           delve
