@@ -221,21 +221,20 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         enabled = require('nixCatsUtils').lazyAdd(true, false),
       },
-
       { 'j-hui/fidget.nvim', opts = {} },
-
       {
         'folke/lazydev.nvim',
         ft = 'lua',
         opts = {
           library = {
-            -- adds type hints for nixCats global
             { path = (nixCats.nixCatsPath or '') .. '/lua', words = { 'nixCats' } },
           },
         },
       },
-      -- kickstart.nvim was still on neodev. lazydev is the new version of neodev
+      -- Blink completion engine
+      { 'saghen/blink.cmp', opts = {} },
     },
+
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -244,45 +243,15 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-
-          -- Find references for the word under your cursor.
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-
-          -- Jump to the type of the word under your cursor.
-          --  Useful when you're not sure what type a variable is and you want to see
-          --  the definition of its *type*, not where it was *defined*.
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
           map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-
-          -- Fuzzy find all the symbols in your current workspace.
-          --  Similar to document symbols, except searches over your entire project.
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-          -- Rename the variable under your cursor.
-          --  Most Language Servers support renaming across files, etc.
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-
-          -- Execute a code action, usually your cursor needs to be on top of an error
-          -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-          -- Opens a popup that displays documentation about the word under your cursor
-          --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
-          --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -293,13 +262,11 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
               group = highlight_augroup,
               callback = vim.lsp.buf.document_highlight,
             })
-
             vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
               buffer = event.buf,
               group = highlight_augroup,
               callback = vim.lsp.buf.clear_references,
             })
-
             vim.api.nvim_create_autocmd('LspDetach', {
               group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
               callback = function(event2)
@@ -309,10 +276,6 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
             })
           end
 
-          -- The following autocommand is used to enable inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -321,94 +284,65 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
         end,
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
+      -- Blink provides its own LSP completion capabilities
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      vim.lsp.config('*', { capabilities = capabilities })
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      -- NOTE: nixCats: there is help in nixCats for lsps at `:h nixCats.LSPs` and also `:h nixCats.luaUtils`
-      -- TODO: I have other lsps to configure, but have to be added to the flake
-      local servers = {}
-      servers.ccls = {}
-      servers.gopls = {}
-      servers.pyright = {}
-      servers.elixirls = {
-        cmd = { 'elixir-ls' },
-      }
-      servers.rust_analyzer = {}
-      servers.vtsls = {}
-      servers.zls = {}
-      servers.gleam = {}
-      servers.yamlls = {}
-      servers.dockerls = {}
-      servers.jsonls = {}
-      servers.tinymist = {
-        settings = {
-          formatterMode = 'typstyle',
-          exportPdf = 'onType',
-          semanticTokens = 'disable',
+      local servers = {
+        ccls = {},
+        gopls = {},
+        pyright = {},
+        elixirls = { cmd = { 'elixir-ls' } },
+        rust_analyzer = {},
+        vtsls = {},
+        zls = {},
+        gleam = {},
+        yamlls = {},
+        dockerls = {},
+        jsonls = {},
+        tinymist = {
+          settings = {
+            formatterMode = 'typstyle',
+            exportPdf = 'onType',
+            semanticTokens = 'disable',
+          },
+        },
+        lua_ls = {
+          settings = {
+            Lua = {
+              completion = { callSnippet = 'Replace' },
+              diagnostics = {
+                globals = { 'nixCats' },
+                disable = { 'missing-fields' },
+              },
+            },
+          },
         },
       }
 
-      -- NOTE: nixCats: nixd is not available on mason.
-      -- Feel free to check the nixd docs for more configuration options:
-      -- https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
       if require('nixCatsUtils').isNixCats then
         servers.nixd = {}
       else
         servers.rnix = {}
         servers.nil_ls = {}
       end
-      servers.lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            diagnostics = {
-              globals = { 'nixCats' },
-              disable = { 'missing-fields' },
-            },
-          },
-        },
-      }
 
-      -- NOTE: nixCats: if nix, use lspconfig instead of mason
-      -- You could MAKE it work, using lspsAndRuntimeDeps and sharedLibraries in nixCats
-      -- but don't... its not worth it. Just add the lsp to lspsAndRuntimeDeps.
       if require('nixCatsUtils').isNixCats then
-        for server_name, _ in pairs(servers) do
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            settings = (servers[server_name] or {}).settings,
-            filetypes = (servers[server_name] or {}).filetypes,
-            cmd = (servers[server_name] or {}).cmd,
-            root_pattern = (servers[server_name] or {}).root_pattern,
-          }
+        for server_name, cfg in pairs(servers) do
+          vim.lsp.config(server_name, cfg)
+          vim.lsp.enable(server_name)
         end
       else
         require('mason').setup()
-
         local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-          'stylua', -- Used to format Lua code
-        })
+        vim.list_extend(ensure_installed, { 'stylua' })
         require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
         require('mason-lspconfig').setup {
           handlers = {
             function(server_name)
-              local server = servers[server_name] or {}
-              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-              require('lspconfig')[server_name].setup(server)
+              vim.lsp.config(server_name, servers[server_name] or {})
+              vim.lsp.enable(server_name)
             end,
           },
         }

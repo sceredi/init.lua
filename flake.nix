@@ -70,7 +70,7 @@
           gleam
           metals
           yaml-language-server
-          dockerfile-language-server-nodejs
+          dockerfile-language-server
           vscode-langservers-extracted
           tinymist
           elixir-ls
