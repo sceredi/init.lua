@@ -70,6 +70,7 @@
           gleam
           metals
           yaml-language-server
+          protols
           dockerfile-language-server
           vscode-langservers-extracted
           tinymist

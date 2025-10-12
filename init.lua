@@ -298,6 +298,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
         zls = {},
         gleam = {},
         yamlls = {},
+        protols = {},
         dockerls = {},
         jsonls = {},
         tinymist = {
