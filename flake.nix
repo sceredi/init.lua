@@ -127,6 +127,7 @@
           # sceredi
           blink-cmp
           rose-pine
+          gruvbox-material
           conform-nvim
           copilot-lua
           vim-fugitive
@@ -139,6 +140,7 @@
           trouble-nvim
           typst-preview-nvim
           undotree
+          no-neck-pain-nvim
         ];
       };
 
