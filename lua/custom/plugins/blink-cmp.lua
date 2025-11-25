@@ -15,6 +15,8 @@ return {
         preset = 'default',
         ['<C-l>'] = { 'snippet_forward', 'fallback' },
         ['<C-h>'] = { 'snippet_backward', 'fallback' },
+        ['<Tab>'] = {},
+        ['<S-Tab>'] = {},
       },
 
       appearance = {
