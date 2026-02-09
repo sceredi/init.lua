@@ -66,7 +66,7 @@
           jdt-language-server
           nixd
           vtsls
-          zls
+          # zls
           gleam
           metals
           yaml-language-server
