@@ -15,7 +15,7 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Nix Flake Checker
-        uses: DeterminateSystems/flake-checker-action@v9
+        uses: DeterminateSystems/flake-checker-action@v10
 
       - name: Check Nixvim Configuration
         run: |
@@ -50,7 +50,7 @@ jobs:
         run: nix flake update
 
       - name: Nix Flake Checker
-        uses: DeterminateSystems/flake-checker-action@v9
+        uses: DeterminateSystems/flake-checker-action@v10
 
       - name: Check Nixvim Configuration
         run: nix flake check .
