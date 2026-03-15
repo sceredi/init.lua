@@ -82,6 +82,7 @@
 
           # linters
           markdownlint-cli
+          golangci-lint
 
           # formatters
           stylua

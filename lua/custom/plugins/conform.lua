@@ -36,6 +36,7 @@ return { -- Autoformat
       cpp = { 'clang-format' },
 
       elixir = { 'mix format' },
+      go = { 'gofmt' },
     },
     formatters = {
       nixfmt = {
