@@ -90,7 +90,7 @@
           black
           google-java-format
           ocamlformat
-          nodePackages.prettier
+          prettier
           alejandra
         ];
       };
