@@ -2,8 +2,6 @@ return {
 
   { -- Linting
     'mfussenegger/nvim-lint',
-    -- NOTE: nixCats: return true only if category is enabled, else false
-    enabled = require('nixCatsUtils').enableForCategory 'kickstart-lint',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
@@ -13,14 +11,17 @@ return {
         javascript = { 'eslint' },
         typescript = { 'eslint' },
         elixir = { 'mix credo' },
-        go = { 'golangci-lint' },
+        go = { 'golangcilint' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
       vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         group = lint_augroup,
         callback = function()
-          require('lint').try_lint()
+          -- Only run the linter in buffers that you can modify in order to
+          -- avoid superfluous noise, notably within the handy LSP pop-ups that
+          -- describe the hovered symbol using Markdown.
+          if vim.bo.modifiable then lint.try_lint() end
         end,
       })
     end,
