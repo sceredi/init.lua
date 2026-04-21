@@ -45,7 +45,7 @@ vim.diagnostic.config {
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Can switch between these as you prefer
-  virtual_text = true,   -- Text shows up at the end of the line
+  virtual_text = true, -- Text shows up at the end of the line
   virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
@@ -108,9 +108,9 @@ require('lazy').setup({
       delay = 0,
       icons = { mappings = vim.g.have_nerd_font },
       spec = {
-        { '<leader>s', group = '[S]earch',   mode = { 'n', 'v' } },
-        { '<leader>t', group = '[T]oggle',   mode = { 'n', 'v' } },
-        { '<leader>x', group = 'Trouble',    mode = { 'n', 'v' } },
+        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
+        { '<leader>t', group = '[T]oggle', mode = { 'n', 'v' } },
+        { '<leader>x', group = 'Trouble', mode = { 'n', 'v' } },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
@@ -138,7 +138,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       require('telescope').setup {
@@ -158,8 +158,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sf', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
-        { desc = '[S]earch hidden [F]iles' })
+      vim.keymap.set('n', '<leader>sf', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', { desc = '[S]earch hidden [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -193,8 +192,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current workspace.
           -- Similar to document symbols, except searches over your entire project.
-          vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols,
-            { buffer = buf, desc = 'Open Workspace Symbols' })
+          vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Open Workspace Symbols' })
 
           -- Jump to the type of the word under your cursor.
           -- Useful when you're not sure what type a variable is and you want to see
@@ -307,8 +305,7 @@ require('lazy').setup({
         elixirls = { cmd = { 'elixir-ls' } },
         rust_analyzer = {},
         vtsls = {},
-        rnix = {},
-        nil_ls = {},
+        nixd = {},
         yamlls = {},
         protols = {},
         dockerls = {},
@@ -351,12 +348,12 @@ require('lazy').setup({
         },
       }
 
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        -- You can add other tools here that you want Mason to install
-      })
-
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      -- local ensure_installed = vim.tbl_keys(servers or {})
+      -- vim.list_extend(ensure_installed, {
+      --   -- You can add other tools here that you want Mason to install
+      -- })
+      --
+      -- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       for name, server in pairs(servers) do
         vim.lsp.config(name, server)
@@ -420,8 +417,7 @@ require('lazy').setup({
     branch = 'main',
     config = function()
       -- ensure basic parser are installed
-      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim',
-        'vimdoc' }
+      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer
