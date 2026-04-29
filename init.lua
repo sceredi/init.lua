@@ -38,6 +38,9 @@ vim.opt.incsearch = true
 
 vim.opt.confirm = true
 
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
 vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
@@ -301,6 +304,7 @@ require('lazy').setup({
 
       local servers = {
         gopls = {},
+        buf_ls = {},
         pyright = {},
         elixirls = { cmd = { 'elixir-ls' } },
         rust_analyzer = {},

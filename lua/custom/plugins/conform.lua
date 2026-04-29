@@ -17,17 +17,23 @@ return { -- Autoformat
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
-      -- Disable "format_on_save lsp_fallback" for languages that don't
-      -- have a well standardized coding style. You can add additional
-      -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true }
-      if disable_filetypes[vim.bo[bufnr].filetype] then
-        return nil
+      local enabled_filetypes = {
+        lua = true,
+        python = true,
+        java = true,
+        ocaml = true,
+        javascript = true,
+        typescript = true,
+        nix = true,
+        cpp = true,
+        elixir = true,
+        go = true,
+      }
+      if enabled_filetypes[vim.bo[bufnr].filetype] then
+        return { timeout_ms = 500 }
       else
-        return {
-          timeout_ms = 500,
-          lsp_format = 'fallback',
-        }
+        vim.notify 'No formatter configured for this filetype'
+        return nil
       end
     end,
     formatters_by_ft = {

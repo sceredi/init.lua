@@ -8,8 +8,6 @@ return {
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         python = { 'flake8', 'ruff' },
-        javascript = { 'eslint' },
-        typescript = { 'eslint' },
         elixir = { 'mix credo' },
         go = { 'golangcilint' },
       }
@@ -21,7 +19,9 @@ return {
           -- Only run the linter in buffers that you can modify in order to
           -- avoid superfluous noise, notably within the handy LSP pop-ups that
           -- describe the hovered symbol using Markdown.
-          if vim.bo.modifiable then lint.try_lint() end
+          if vim.bo.modifiable then
+            lint.try_lint()
+          end
         end,
       })
     end,
